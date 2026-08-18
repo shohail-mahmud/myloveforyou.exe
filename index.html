@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="myloveforyou.exe - a tiny bro appreciation website">
+  <title>myloveforyou.exe</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.cdnfonts.com/css/hannahandwriting" rel="stylesheet">
+
+  <style>
+    :root {
+      --hand-font: 'HannaHandwriting', 'Kalam', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      color: #000000;
+      overflow: hidden;
+    }
+
+    /* Hide audio element */
+    audio {
+      display: none;
+    }
+
+    /* Primitive old-web homepage */
+    #home-screen {
+      font-family: "Times New Roman", Times, serif;
+      text-align: left;
+      padding: 3rem 0.75rem 0.5rem;
+    }
+
+    #home-screen h1 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin: 0 0 1rem 0;
+    }
+
+    #home-screen p {
+      font-size: 1rem;
+      line-height: 1.4;
+      margin: 0 0 1rem 0;
+    }
+
+    #home-screen .exe-link {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1rem;
+      color: #0000EE;
+      text-decoration: underline;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    #home-screen .exe-link:hover {
+      color: #551A8B;
+    }
+
+    #home-screen .muted {
+      color: #333333;
+    }
+
+    /* Real site uses handwriting font */
+    #credits-screen {
+      font-family: var(--hand-font);
+    }
+
+    /* Page transition */
+    .screen {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+    }
+
+    .screen.hidden-screen {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .screen.active-screen {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Credit content */
+    .credits-content {
+      position: relative;
+      padding-top: 1.5rem;
+      padding-bottom: 3rem;
+    }
+
+    .credits-content.credits-animate {
+      animation: creditsScroll 100s linear forwards;
+    }
+
+    @keyframes creditsScroll {
+      0% {
+        transform: translateY(100vh);
+      }
+      100% {
+        transform: translateY(calc(-100% + 100vh));
+      }
+    }
+
+    /* Music toggle */
+    .music-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 50;
+      font-family: var(--hand-font);
+      font-size: 0.875rem;
+      color: #000000;
+      background: #ffffff;
+      border: 1px solid #000000;
+      padding: 0.25rem 0.5rem;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+    }
+
+    .music-toggle:hover {
+      opacity: 1;
+    }
+
+    .doodle {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.75;
+    }
+
+    /* Subtle fade-in for text lines */
+    .credit-line {
+      opacity: 0.92;
+    }
+
+    /* Ensure no horizontal scroll */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-white text-black">
+
+  <audio id="bg-music" preload="auto" loop></audio>
+
+  <!-- PAGE 1: TROLL HOME SCREEN -->
+  <div id="home-screen" class="screen active-screen">
+    <h1>Look twin</h1>
+    <p>I have something for you</p>
+    <p>
+      <button id="love-btn" class="exe-link" type="button">myloveforyou.exe</button> click me (no scem)
+    </p>
+    <p class="muted">Trusted by None</p>
+  </div>
+
+  <!-- PAGE 2: REAL WEBSITE / CREDITS -->
+  <div id="credits-screen" class="screen hidden-screen fixed inset-0 overflow-y-auto">
+    
+    <!-- Music toggle -->
+    <button id="music-toggle" class="music-toggle hidden" type="button" aria-label="Toggle music">
+      Music: ON
+    </button>
+    
+    <!-- Hand-drawn doodle composition (static, scrolls with the page) -->
+    <div class="credits-content relative px-4 md:px-8">
+
+      <!-- small star top left -->
+      <svg class="doodle top-[2%] left-[3%] w-6 h-6 md:w-9 md:h-9 rotate-[-12deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3 L23 16 L36 16 L25 24 L29 36 L20 28 L11 36 L15 24 L4 16 L17 16 Z" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- tiny heart top right -->
+      <svg class="doodle top-[4%] right-[5%] w-5 h-5 md:w-8 md:h-8 rotate-[8deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 33 C20 33 7 24 7 15 C7 10 11 7 15 7 C18 7 20 9 20 12 C20 9 22 7 25 7 C29 7 33 10 33 15 C33 24 20 33 20 33 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- wavy underline near heading -->
+      <svg class="doodle hidden md:block top-[10%] right-[8%] w-16 h-5 md:w-24 md:h-7 rotate-[3deg]" viewBox="0 0 80 25" aria-hidden="true">
+        <path d="M3 15 Q12 8 22 15 Q32 22 42 14 Q52 6 62 15 Q72 24 77 12" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+
+      <!-- cloud left -->
+      <svg class="doodle hidden md:block top-[18%] left-[2%] w-12 h-8 md:w-16 md:h-10 rotate-[-6deg]" viewBox="0 0 70 45" aria-hidden="true">
+        <path d="M12 34 Q5 34 6 27 Q7 20 16 20 Q18 12 30 12 Q40 12 44 18 Q54 17 57 24 Q63 25 62 31 Q61 37 52 37 Q32 37 12 34 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- sparkle right -->
+      <svg class="doodle top-[22%] right-[4%] w-6 h-6 md:w-10 md:h-10 rotate-[15deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 4 L20 36" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M4 20 L36 20" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+        <circle cx="20" cy="20" r="1.5" fill="black"/>
+      </svg>
+
+      <!-- curved arrow left -->
+      <svg class="doodle hidden md:block top-[30%] left-[5%] w-10 h-7 md:w-14 md:h-10 rotate-[-10deg]" viewBox="0 0 60 40" aria-hidden="true">
+        <path d="M6 30 Q22 10 48 16" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M40 8 L50 17 L38 22" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- little flower right -->
+      <svg class="doodle top-[34%] right-[6%] w-5 h-5 md:w-11 md:h-11 rotate-[20deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="2.5" fill="none" stroke="black" stroke-width="1.2"/>
+        <path d="M20 12 L20 7" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M20 28 L20 33" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M12 20 L7 20" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M28 20 L33 20" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M14 14 L10 10" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M26 26 L30 30" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M14 26 L10 30" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M26 14 L30 10" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+
+      <!-- rain cloud left -->
+      <svg class="doodle hidden md:block top-[42%] left-[3%] w-11 h-10 md:w-16 md:h-14 rotate-[5deg]" viewBox="0 0 60 55" aria-hidden="true">
+        <path d="M10 32 Q4 32 5 25 Q6 18 15 18 Q17 10 29 10 Q39 10 42 17 Q51 16 53 23 Q58 24 57 30 Q56 36 47 36 Q28 36 10 32 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M16 40 L14 48" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M28 40 L26 50" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M40 40 L38 48" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+
+      <!-- small circle right -->
+      <svg class="doodle top-[48%] right-[8%] w-5 h-5 md:w-8 md:h-8 rotate-[-8deg]" viewBox="0 0 30 30" aria-hidden="true">
+        <path d="M15 4 C22 4 26 9 26 15 C26 22 21 26 15 26 C8 26 4 21 4 15 C4 8 9 4 15 4 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+
+      <!-- asterisk left -->
+      <svg class="doodle top-[54%] left-[6%] w-5 h-5 md:w-8 md:h-8 rotate-[25deg]" viewBox="0 0 30 30" aria-hidden="true">
+        <path d="M15 5 L15 25" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M5 15 L25 15" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M8 8 L22 22" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M22 8 L8 22" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+
+      <!-- straight arrow right -->
+      <svg class="doodle hidden md:block top-[60%] right-[4%] w-10 h-6 md:w-16 md:h-8 rotate-[6deg]" viewBox="0 0 70 35" aria-hidden="true">
+        <path d="M5 18 L55 18" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M46 10 L56 18 L46 26" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- small heart left -->
+      <svg class="doodle top-[66%] left-[4%] w-5 h-5 md:w-8 md:h-8 rotate-[-15deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 33 C20 33 7 24 7 15 C7 10 11 7 15 7 C18 7 20 9 20 12 C20 9 22 7 25 7 C29 7 33 10 33 15 C33 24 20 33 20 33 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- squiggle right -->
+      <svg class="doodle hidden md:block top-[72%] right-[7%] w-10 h-6 md:w-14 md:h-8 rotate-[-5deg]" viewBox="0 0 60 30" aria-hidden="true">
+        <path d="M5 15 Q12 5 18 15 Q24 25 30 15 Q36 5 42 15 Q48 25 55 15" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+
+      <!-- star bottom left -->
+      <svg class="doodle top-[80%] left-[3%] w-5 h-5 md:w-11 md:h-11 rotate-[10deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3 L23 16 L36 16 L25 24 L29 36 L20 28 L11 36 L15 24 L4 16 L17 16 Z" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- cloud right -->
+      <svg class="doodle hidden md:block top-[84%] right-[2%] w-12 h-8 md:w-16 md:h-10 rotate-[-4deg]" viewBox="0 0 70 45" aria-hidden="true">
+        <path d="M12 34 Q5 34 6 27 Q7 20 16 20 Q18 12 30 12 Q40 12 44 18 Q54 17 57 24 Q63 25 62 31 Q61 37 52 37 Q32 37 12 34 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- dots cluster left -->
+      <svg class="doodle top-[90%] left-[8%] w-5 h-5 md:w-12 md:h-12 rotate-[12deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="10" cy="12" r="1.5" fill="black"/>
+        <circle cx="22" cy="8" r="1.5" fill="black"/>
+        <circle cx="30" cy="18" r="1.5" fill="black"/>
+        <circle cx="14" cy="26" r="1.5" fill="black"/>
+        <circle cx="28" cy="30" r="1.5" fill="black"/>
+      </svg>
+
+      <!-- check mark right -->
+      <svg class="doodle top-[94%] right-[6%] w-6 h-6 md:w-10 md:h-10 rotate-[-10deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M6 20 L16 30 L32 10" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- tiny spiral left -->
+      <svg class="doodle top-[98%] left-[4%] w-5 h-5 md:w-8 md:h-8 rotate-[18deg]" viewBox="0 0 30 30" aria-hidden="true">
+        <path d="M15 15 C20 15 20 22 15 22 C10 22 10 12 18 10 C24 9 25 18 22 23 C19 27 10 26 8 20" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+
+      <!-- extra small star right -->
+      <svg class="doodle top-[6%] right-[12%] w-4 h-4 md:w-7 md:h-7 rotate-[22deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3 L23 16 L36 16 L25 24 L29 36 L20 28 L11 36 L15 24 L4 16 L17 16 Z" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- extra tiny heart left -->
+      <svg class="doodle top-[14%] left-[10%] w-4 h-4 md:w-6 md:h-6 rotate-[-18deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 33 C20 33 7 24 7 15 C7 10 11 7 15 7 C18 7 20 9 20 12 C20 9 22 7 25 7 C29 7 33 10 33 15 C33 24 20 33 20 33 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- extra small circle left -->
+      <svg class="doodle top-[25%] left-[12%] w-4 h-4 md:w-7 md:h-7 rotate-[10deg]" viewBox="0 0 30 30" aria-hidden="true">
+        <path d="M15 4 C22 4 26 9 26 15 C26 22 21 26 15 26 C8 26 4 21 4 15 C4 8 9 4 15 4 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+
+      <!-- extra tiny underline right -->
+      <svg class="doodle hidden md:block top-[37%] right-[10%] w-12 h-4 md:w-16 md:h-5 rotate-[-3deg]" viewBox="0 0 60 20" aria-hidden="true">
+        <path d="M3 12 Q10 6 20 12 Q30 18 40 10 Q50 4 57 11" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+
+      <!-- extra small heart right -->
+      <svg class="doodle top-[44%] right-[12%] w-4 h-4 md:w-6 md:h-6 rotate-[14deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 33 C20 33 7 24 7 15 C7 10 11 7 15 7 C18 7 20 9 20 12 C20 9 22 7 25 7 C29 7 33 10 33 15 C33 24 20 33 20 33 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- extra small sparkle left -->
+      <svg class="doodle top-[50%] left-[10%] w-4 h-4 md:w-7 md:h-7 rotate-[30deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 4 L20 36" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M4 20 L36 20" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+
+      <!-- extra tiny star right -->
+      <svg class="doodle top-[56%] right-[11%] w-4 h-4 md:w-6 md:h-6 rotate-[-20deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3 L23 16 L36 16 L25 24 L29 36 L20 28 L11 36 L15 24 L4 16 L17 16 Z" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- extra small circle right -->
+      <svg class="doodle top-[64%] right-[10%] w-4 h-4 md:w-6 md:h-6 rotate-[12deg]" viewBox="0 0 30 30" aria-hidden="true">
+        <path d="M15 4 C22 4 26 9 26 15 C26 22 21 26 15 26 C8 26 4 21 4 15 C4 8 9 4 15 4 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+
+      <!-- extra tiny arrow left -->
+      <svg class="doodle top-[70%] left-[8%] w-6 h-4 md:w-10 md:h-6 rotate-[8deg]" viewBox="0 0 50 30" aria-hidden="true">
+        <path d="M5 15 L38 15" stroke="black" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M30 8 L40 15 L30 22" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- extra small heart right -->
+      <svg class="doodle top-[76%] right-[9%] w-4 h-4 md:w-6 md:h-6 rotate-[-10deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 33 C20 33 7 24 7 15 C7 10 11 7 15 7 C18 7 20 9 20 12 C20 9 22 7 25 7 C29 7 33 10 33 15 C33 24 20 33 20 33 Z" fill="none" stroke="black" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- extra small sparkle left -->
+      <svg class="doodle top-[82%] left-[10%] w-4 h-4 md:w-7 md:h-7 rotate-[16deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 4 L20 36" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+        <path d="M4 20 L36 20" stroke="black" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+
+      <!-- extra tiny cloud left -->
+      <svg class="doodle hidden md:block top-[88%] left-[12%] w-8 h-5 md:w-12 md:h-8 rotate-[6deg]" viewBox="0 0 60 35" aria-hidden="true">
+        <path d="M10 26 Q4 26 5 20 Q6 14 14 14 Q16 7 26 7 Q35 7 38 13 Q47 12 49 18 Q54 19 53 24 Q52 29 44 29 Q27 29 10 26 Z" fill="none" stroke="black" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- extra small star right -->
+      <svg class="doodle top-[92%] right-[10%] w-4 h-4 md:w-6 md:h-6 rotate-[24deg]" viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 3 L23 16 L36 16 L25 24 L29 36 L20 28 L11 36 L15 24 L4 16 L17 16 Z" fill="none" stroke="black" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+      <!-- MAIN SCROLLING TEXT -->
+      <div class="max-w-2xl mx-auto text-center px-6">
+        
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-10 md:mb-14 credit-line">
+          THANKS FOR EXISTING, BRO.
+        </h2>
+
+        <div class="space-y-6 md:space-y-8 text-xl md:text-2xl lg:text-3xl leading-relaxed md:leading-relaxed font-normal">
+          <p class="credit-line">You have changed my life in ways you probably don't even realize.</p>
+          <p class="credit-line">You were always there when I needed someone.</p>
+          <p class="credit-line">Through the good days, the bad days, the stupid days, and all the completely unnecessary chaos in between.</p>
+          <p class="credit-line">You listened to me.</p>
+          <p class="credit-line">You supported me.</p>
+          <p class="credit-line">You made me laugh.</p>
+          <p class="credit-line">You stayed by my side.</p>
+          <p class="credit-line">And honestly, I'm really grateful for that.</p>
+          <p class="credit-line">Some people become a part of your life without you realizing how important they are.</p>
+          <p class="credit-line">You're one of those people.</p>
+          <p class="credit-line">Thank you for every conversation.</p>
+          <p class="credit-line">Thank you for every laugh.</p>
+          <p class="credit-line">Thank you for every stupid memory.</p>
+          <p class="credit-line">Thank you for every moment we've shared.</p>
+          <p class="credit-line">I might not say it all the time, but I genuinely appreciate having you in my life.</p>
+          <p class="credit-line">You've made things better simply by being there.</p>
+          <p class="credit-line">So, bro...</p>
+          <p class="credit-line">Thank you for existing.</p>
+          <p class="credit-line">And thank you for being you.</p>
+          <p class="credit-line">I'm really glad our paths crossed.</p>
+        </div>
+
+        <!-- FINAL CREDITS SECTION -->
+        <div class="mt-20 md:mt-28 space-y-8 md:space-y-10 text-xl md:text-2xl lg:text-3xl">
+          <p class="font-bold text-3xl md:text-4xl credit-line">THANKS FOR EXISTING.</p>
+          <p class="credit-line">A WEBSITE FOR THE BRO</p>
+          <p class="credit-line">Made with questionable amounts of affection</p>
+          
+          <div class="space-y-3 md:space-y-4 pt-2">
+            <p class="font-bold credit-line">Special thanks to:</p>
+            <p class="credit-line">Late night conversations</p>
+            <p class="credit-line">Stupid jokes</p>
+            <p class="credit-line">Unnecessary arguments</p>
+            <p class="credit-line">Random memories</p>
+            <p class="credit-line">And every moment in between</p>
+          </div>
+
+          <p class="font-bold text-3xl md:text-4xl pt-6 credit-line">THE END</p>
+
+          <div class="flex justify-center pt-4 pb-12">
+            <svg class="w-8 h-8 md:w-10 md:h-10" viewBox="0 0 50 50" aria-hidden="true">
+              <path d="M25 42 C25 42 8 30 8 18 C8 12 13 8 18 8 C22 8 25 11 25 14 C25 11 28 8 32 8 C37 8 42 12 42 18 C42 30 25 42 25 42 Z" fill="none" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Music credit -->
+        <div class="pt-6 pb-2 text-sm md:text-base opacity-60 credit-line">
+          <p>Music: “Home” by Edward Sharpe &amp; The Magnetic Zeros</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const loveBtn = document.getElementById('love-btn');
+      const homeScreen = document.getElementById('home-screen');
+      const creditsScreen = document.getElementById('credits-screen');
+      const bgMusic = document.getElementById('bg-music');
+      const musicToggle = document.getElementById('music-toggle');
+
+      const creditsContent = document.querySelector('.credits-content');
+
+:root {
+      --hand-font: 'HannaHandwriting', 'Kalam', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffff;
+      color: #000000;
+      overflow: hidden;
+    }
+
+    /* Primitive old-web homepage */
+        if (bgMusic.paused) {
+          musicToggle.textContent = 'Music: OFF';
+        } else {
+          musicToggle.textContent = 'Music: ON';
+        }
+      }
+
+      function preventScroll(e) {
+        e.preventDefault();
+      }
+
+      function preventKeyScroll(e) {
+        const scrollKeys = [32, 33, 34, 35, 36, 37, 38, 39, 40];
+        if (scrollKeys.indexOf(e.keyCode) !== -1) {
+          e.preventDefault();
+        }
+      }
+
+      function lockScrolling() {
+        creditsScreen.style.overflow = 'hidden';
+        creditsScreen.addEventListener('wheel', preventScroll, { passive: false });
+        creditsScreen.addEventListener('touchmove', preventScroll, { passive: false });
+        window.addEventListener('keydown', preventKeyScroll, { passive: false });
+      }
+
+      function unlockScrolling() {
+        creditsScreen.style.overflow = '';
+        creditsScreen.removeEventListener('wheel', preventScroll);
+        creditsScreen.removeEventListener('touchmove', preventScroll);
+        window.removeEventListener('keydown', preventKeyScroll);
+      }
+
+      function startAutoScroll() {
+        autoScrollActive = true;
+        animationStartTime = performance.now();
+        creditsContent.classList.add('credits-animate');
+        lockScrolling();
+      }
+
+      function finishAutoScroll() {
+        if (!autoScrollActive) return;
+        autoScrollActive = false;
+        
+        unlockScrolling();
+        
+        const maxScroll = creditsScreen.scrollHeight - creditsScreen.clientHeight;
+        creditsScreen.scrollTop = maxScroll;
+        creditsContent.classList.remove('credits-animate');
+        creditsContent.style.transform = '';
+      }
+
+      // Animation completion
+      creditsContent.addEventListener('animationend', finishAutoScroll);
+
+      // Music toggle
+      musicToggle.addEventListener('click', function() {
+        if (bgMusic.paused) {
+          bgMusic.play().catch(function(error) {
+            console.log('Audio playback was prevented:', error);
+          });
+        } else {
+          bgMusic.pause();
+        }
+        updateMusicToggle();
+      });
+
+      // Enter credits experience
+      loveBtn.addEventListener('click', function() {
+        // Start music
+        bgMusic.volume = 0.5;
+        const playPromise = bgMusic.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.catch(function(error) {
+            console.log('Audio playback was prevented:', error);
+          });
+        }
+
+        // Transition screens
+        homeScreen.classList.remove('active-screen');
+        homeScreen.classList.add('hidden-screen');
+
+        creditsScreen.classList.remove('hidden-screen');
+        creditsScreen.classList.add('active-screen');
+
+        // Show music toggle
+        musicToggle.classList.remove('hidden');
+        updateMusicToggle();
+
+        // Start auto-scroll after transition
+        setTimeout(startAutoScroll, 800);
+      });
+
+      // Keep toggle text in sync if audio ends or is blocked
+      bgMusic.addEventListener('pause', updateMusicToggle);
+      bgMusic.addEventListener('play', updateMusicToggle);
+    })();
+  </script>
+
+</body>
+</html>
